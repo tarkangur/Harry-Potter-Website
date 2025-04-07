@@ -1,9 +1,8 @@
 import requests
-from flask import Flask, render_template, url_for, request, redirect, flash
+from flask import Flask, render_template
 
 
 ENDPOINT = "https://api.potterdb.com/v1/"
-
 
 app = Flask(__name__)
 
@@ -15,27 +14,42 @@ def home():
 
 @app.route("/books", methods=["GET"])
 def books():
-    return render_template('books.html')
+    response = requests.get(f"{ENDPOINT}books")
+    data = response.json()
+    books = [book['attributes'] for book in data['data']]
+    return render_template("books.html", books=books)
 
 
 @app.route("/films", methods=["GET"])
 def films():
-    return render_template('films.html')
+    response = requests.get(f"{ENDPOINT}movies")
+    data = response.json()
+    films = [film['attributes'] for film in data['data']]
+    return render_template('films.html', films=films)
 
 
 @app.route("/spells", methods=["GET"])
 def spells():
-    return render_template('spells.html')
+    response = requests.get(f"{ENDPOINT}spells")
+    data = response.json()
+    spells = [spell['attributes'] for spell in data['data']]
+    return render_template('spells.html', spells=spells)
 
 
 @app.route("/characters", methods=["GET"])
 def characters():
-    return render_template('characters.html')
+    response = requests.get(f"{ENDPOINT}characters")
+    data = response.json()
+    characters = [character['attributes'] for character in data['data']]
+    return render_template('characters.html', characters=characters)
 
 
 @app.route("/positions", methods=["GET"])
 def potions():
-    return render_template('positions.html')
+    response = requests.get(f"{ENDPOINT}potions")
+    data = response.json()
+    potions = [potion['attributes'] for potion in data['data']]
+    return render_template('positions.html', potions=potions)
 
 
 if __name__ == "__main__":
