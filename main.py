@@ -38,18 +38,21 @@ def spells():
 
 @app.route("/characters", methods=["GET"])
 def characters():
-    response = requests.get(f"{ENDPOINT}characters")
-    data = response.json()
-    characters = [character['attributes'] for character in data['data']]
+    characters = []
+    for i in range(1, 51):
+        response = requests.get(f"{ENDPOINT}characters?page[number]={i}")
+        data = response.json()
+        for character in data['data']:
+            characters.append(character['attributes'])
     return render_template('characters.html', characters=characters)
 
 
-@app.route("/positions", methods=["GET"])
+@app.route("/potions", methods=["GET"])
 def potions():
     response = requests.get(f"{ENDPOINT}potions")
     data = response.json()
     potions = [potion['attributes'] for potion in data['data']]
-    return render_template('positions.html', potions=potions)
+    return render_template('potions.html', potions=potions)
 
 
 if __name__ == "__main__":
