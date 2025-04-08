@@ -1,12 +1,13 @@
 <header>
-    <nav>
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/books">Books</a></li>
-            <li><a href="/characters">Characters</a></li>
-            <li><a href="/films">Films</a></li>
-            <li><a href="/positions">Positions</a></li>
-            <li><a href="/spells">Spells</a></li>
-        </ul>
+  <div class="nav-container">
+    <h1 class="logo">Harry Potter Wiki</h1>
+    <nav class="nav-links">
+      <a href="{{ url_for('home') }}">Home</a>
+      <a href="{{ url_for('books') }}">Books</a>
+      <a href="{{ url_for('characters') }}">Characters</a>
+      <a href="{{ url_for('films') }}">Films</a>
+      <a href="{{ url_for('spells') }}">Spells</a>
+      <a href="{{ url_for('potions') }}">Positions</a>
     </nav>
+  </div>
 </header>

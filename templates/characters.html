@@ -1,15 +1,26 @@
 {% extends 'base.html' %}
 
-{% block title %}Books{% endblock %}
+{% block title %}Characters{% endblock %}
 
 {% block content %}
-    <main>
-        <section class="content">
-            <h2>Explore the Characters</h2>
-            <div id="characters-list">
-                <!-- Flask will populate character data here -->
+<div class="card-container">
+    {% for character in characters %}
+        {% if character.image %}
+        <div class="card">
+            <div class="card-inner" >
+                <div class="card-front">
+                    <h2>{{ character.title }}</h2>
+                    <p><strong>Name:</strong> {{ character.name }}</p>
+                    <p><strong>Born:</strong> {{ character.born }}</p>
+                    <p><strong>Died:</strong> {{ character.died }}</p>
+                    <p><strong>House:</strong> {{ character.house }}</p>
+                    <a href="{{ character.wiki }}" target="_blank">Read more on Wiki</a>
+                </div>
+                <div class="card-back" style="background-image: url('{{ character.image }}')">
+                </div>
             </div>
-        </section>
-    </main>
-
+        </div>
+        {% endif %}
+    {% endfor %}
+</div>
 {% endblock %}

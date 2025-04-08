@@ -3,17 +3,17 @@
 {% block title %}Books{% endblock %}
 
 {% block content %}
-<div class="books-container">
+<div class="card-container">
     {% for book in books %}
-    <div class="book-card">
-        <div class="book-inner" style="background-image: url('{{ book.cover }}')">
-            <div class="book-front">
+    <div class="card">
+        <div class="card-inner" style="background-image: url('{{ book.cover }}')">
+            <div class="card-front">
                 <h2>{{ book.title }}</h2>
                 <p><strong>Author:</strong> {{ book.author }}</p>
                 <p><strong>Release:</strong> {{ book.release_date }}</p>
                 <p><strong>Pages:</strong> {{ book.pages }}</p>
             </div>
-            <div class="book-back">
+            <div class="card-back">
                 <p>{{ book.summary }}</p>
                 <a href="{{ book.wiki }}" target="_blank">Read more on Wiki</a>
             </div>
