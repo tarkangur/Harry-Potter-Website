@@ -1,5 +1,5 @@
 import requests
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect, url_for
 
 
 ENDPOINT = "https://api.potterdb.com/v1/"
@@ -30,9 +30,12 @@ def films():
 
 @app.route("/spells", methods=["GET"])
 def spells():
-    response = requests.get(f"{ENDPOINT}spells")
-    data = response.json()
-    spells = [spell['attributes'] for spell in data['data']]
+    spells = []
+    for i in range(1, 5):
+        response = requests.get(f"{ENDPOINT}spells?page[number]={i}")
+        data = response.json()
+        for spell in data['data']:
+            spells.append(spell['attributes'])
     return render_template('spells.html', spells=spells)
 
 
@@ -49,10 +52,18 @@ def characters():
 
 @app.route("/potions", methods=["GET"])
 def potions():
-    response = requests.get(f"{ENDPOINT}potions")
-    data = response.json()
-    potions = [potion['attributes'] for potion in data['data']]
+    potions = []
+    for i in range(1, 3):
+        response = requests.get(f"{ENDPOINT}potions?page[number]={i}")
+        data = response.json()
+        for potion in data['data']:
+            potions.append(potion['attributes'])
     return render_template('potions.html', potions=potions)
+
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return redirect(url_for('home'))
 
 
 if __name__ == "__main__":
