@@ -1,16 +1,27 @@
 {% extends 'base.html' %}
 
-{% block title %}Books{% endblock %}
+{% block title %}Spells{% endblock %}
 
 {% block content %}
-
-    <main>
-        <section class="content">
-            <h2>Explore the Spells</h2>
-            <div id="spells-list">
-                <!-- Flask will populate spell data here -->
+<div class="card-container">
+    {% for spell in spells %}
+    <div class="card">
+        <div class="card-inner">
+            <div class="card-front">
+                <h2>{{ spell.name }}</h2>
+                <p><strong>Category:</strong> {{ spell.category }}</p>
+                <p><strong>Effect:</strong> {{ spell.effect }}</p>
+                <p><strong>Hand:</strong> {{ spell.hand }}</p>
+                <p><strong>Incantation:</strong> {{ spell.incantation }}</p>
+                {% if spell.light %}
+                    <p><strong>Light:</strong> {{ spell.light }}</p>
+                {% endif %}
+                <a href="{{ spell.wiki }}" target="_blank">Read more on Wiki</a>
             </div>
-        </section>
-    </main>
-
+            <div class="card-back" style="background-image: url('{{ spell.image }}')">
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
 {% endblock %}

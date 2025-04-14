@@ -1,16 +1,26 @@
 {% extends 'base.html' %}
 
-{% block title %}Books{% endblock %}
+{% block title %}Films{% endblock %}
 
 {% block content %}
-
-    <main>
-        <section class="content">
-            <h2>Explore the Films</h2>
-            <div id="films-list">
-                <!-- Flask will populate film data here -->
+<div class="card-container">
+    {% for film in films %}
+    <div class="card">
+        <div class="card-inner" style="background-image: url('{{ film.poster }}')">
+            <div class="card-front">
+                <h2>{{ film.title }}</h2>
+                <p><strong>Box Office:</strong> {{ film.box_office }}</p>
+                <p><strong>Budget:</strong> {{ film.budget }}</p>
+                <p><strong>Director:</strong> {{ film.directors[0] }}</p>
+                <p><strong>Release:</strong> {{ film.release_date }}</p>
+                <p><strong>Time:</strong> {{ film.running_time }}</p>
             </div>
-        </section>
-    </main>
-
+            <div class="card-back">
+                <p>{{ film.summary }}</p>
+                <a href="{{ film.wiki }}" target="_blank">Read more on Wiki</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
 {% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Potions{% endblock %}
+
+{% block content %}
+<div class="card-container">
+    {% for potion in potions %}
+    <div class="card">
+        <div class="card-inner" style="background-image: url('{{ potion.image }}')">
+            <div class="card-front">
+                <h2>{{ potion.name }}</h2>
+                <p><strong>Characteristic:</strong> {{ potion.characteristics }}</p>
+                <p><strong>Difficulty:</strong> {{ potion.difficulty }}</p>
+                <p><strong>Ingredients:</strong> {{ potion.ingredients }}</p>
+                <a href="{{ potion.wiki }}" target="_blank">Read more on Wiki</a>
+            </div>
+        </div>
+        <div class="card-back">
+            <img src="{{ potion.image }}" alt="{{ potion.name }}">
+        </div>
+
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
