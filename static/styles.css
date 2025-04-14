@@ -98,7 +98,14 @@ header, footer {
 .card-back {
     transform: rotateY(180deg);
     overflow-y: auto;
-    background-size: cover;
+    background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
+}
+
+.card-back img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
 }
